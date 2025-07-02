@@ -1,4 +1,4 @@
-import { IsNotEmpty, IsEmail } from 'class-validator';
+import { IsNotEmpty, IsEmail, Length } from 'class-validator';
 import { Column } from 'typeorm';
 
 export class CreateCustomerDto {
@@ -9,6 +9,7 @@ export class CreateCustomerDto {
   lastname: string;
 
   @IsNotEmpty()
+  @Length(8, 8)
   dni: string;
 
   @IsNotEmpty()
