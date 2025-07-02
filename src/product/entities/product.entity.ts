@@ -12,10 +12,10 @@ export class Product {
   @Column({ nullable: true })
   description: string;
 
-  @Column({ type: 'int' })
+  @Column({ name: 'total_quantity', type: 'int' })
   totalQuantity: number;
 
-  @Column({ type: 'int' })
+  @Column({ name: 'available_quantity', type: 'int' })
   availableQuantity: number;
 
   @Column({ nullable: true })
