@@ -1,0 +1,18 @@
+version: '3.8'
+
+services:
+  db:
+    image: postgres:15
+    container_name: pg_test_container
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: storedb
+    ports:
+      - "5433:5432" # ⚠️ cambiar el puerto en Windows si 5432 sigue ocupado
+    volumes:
+      - pg_test_data:/var/lib/postgresql/data
+
+volumes:
+  pg_test_data:
