@@ -18,7 +18,7 @@ export class Product {
   @Column({ name: 'available_quantity', type: 'int' })
   availableQuantity: number;
 
-  @Column({ nullable: true })
+  @Column({ name: 'category', nullable: true })
   category: string;
 
   @Column({ type: 'float' })
