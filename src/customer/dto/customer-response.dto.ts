@@ -1,6 +1,6 @@
 import { Expose } from 'class-transformer';
 
-export class CustomerDto {
+export class CustomerResponseDto {
   @Expose()
   id: number;
 
@@ -11,14 +11,5 @@ export class CustomerDto {
   lastname: string;
 
   @Expose()
-  dni: string;
-
-  @Expose()
-  address: string;
-
-  @Expose()
-  numberPhone: string;
-
-  @Expose()
   email: string;
-} 
+}

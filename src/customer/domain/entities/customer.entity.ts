@@ -1,5 +1,5 @@
 import { Entity, Column, PrimaryGeneratedColumn, OneToMany } from 'typeorm';
-import { Invoice } from '../../invoice/entities/invoice.entity';
+import { Invoice } from '../../../invoice/entities/invoice.entity';
 
 @Entity('customers')
 export class Customer {
@@ -12,7 +12,7 @@ export class Customer {
   @Column()
   lastname: string;
 
-  @Column()
+  @Column({unique: true})
   dni: string;
 
   @Column()

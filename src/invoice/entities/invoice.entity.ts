@@ -6,7 +6,7 @@ import {
   OneToMany,
   JoinColumn,
 } from 'typeorm';
-import { Customer } from '../../customer/entities/customer.entity';
+import { Customer } from '../../customer/domain/entities/customer.entity';
 import { InvoiceDetail } from './invoice-detail.entity';
 
 @Entity({ name: 'invoices' })

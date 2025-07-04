@@ -4,7 +4,7 @@ import { InvoiceService } from './invoice.service';
 import { InvoiceController } from './invoice.controller';
 import { Invoice } from './entities/invoice.entity';
 import { InvoiceDetail } from './entities/invoice-detail.entity';
-import { Customer } from '../customer/entities/customer.entity';
+import { Customer } from '../customer/domain/entities/customer.entity';
 import { Product } from '../product/entities/product.entity';
 
 @Module({

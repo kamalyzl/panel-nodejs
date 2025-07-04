@@ -3,7 +3,7 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { CustomerModule } from './customer/customer.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { Customer } from './customer/entities/customer.entity';
+import { Customer } from './customer/domain/entities/customer.entity';
 import { InvoiceModule } from './invoice/invoice.module';
 import { ProductModule } from './product/product.module';
 import { Invoice } from './invoice/entities/invoice.entity';

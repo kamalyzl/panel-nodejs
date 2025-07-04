@@ -5,7 +5,7 @@ import { CreateInvoiceDto } from './dto/create-invoice.dto';
 import { UpdateInvoiceDto } from './dto/update-invoice.dto';
 import { Invoice } from './entities/invoice.entity';
 import { InvoiceDetail } from './entities/invoice-detail.entity';
-import { Customer } from '../customer/entities/customer.entity';
+import { Customer } from '../customer/domain/entities/customer.entity';
 import { Product } from '../product/entities/product.entity';
 
 @Injectable()
