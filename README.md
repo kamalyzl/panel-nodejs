@@ -1,98 +1,322 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="120" alt="Nest Logo" /></a>
-</p>
+# Panel NodeJS - API REST
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+API REST desarrollada con NestJS siguiendo principios de Clean Architecture y Domain-Driven Design.
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg" alt="Donate us"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow" alt="Follow us on Twitter"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+## 🚀 Tecnologías
 
-## Description
+- **Framework**: NestJS 10.x
+- **Lenguaje**: TypeScript 5.x
+- **Base de Datos**: PostgreSQL 15.x
+- **ORM**: TypeORM
+- **Validación**: class-validator, class-transformer
+- **Documentación**: Swagger/OpenAPI
+- **Testing**: Jest
+- **Containerización**: Docker & Docker Compose
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+## 🏗️ Patrones de Diseño
 
-## Project setup
-
-```bash
-$ npm install
+### Clean Architecture
+```
+src/
+├── domain/           # Reglas de negocio y entidades
+├── application/      # Casos de uso y servicios
+├── infrastructure/   # Controllers, repositories, config
+└── dto/             # Data Transfer Objects
 ```
 
-## Compile and run the project
+### Domain-Driven Design (DDD)
+- **Entities**: Representan objetos del dominio con identidad
+- **Value Objects**: Objetos inmutables sin identidad
+- **Repositories**: Abstracción para acceso a datos
+- **Services**: Lógica de negocio compleja
 
+### Repository Pattern
+- Interfaz en dominio: `ICustomerRepository`
+- Implementación en infraestructura: `CustomerRepository`
+- Inyección de dependencias con tokens
+
+### DTO Pattern
+- **Create DTOs**: Para validación de entrada
+- **Response DTOs**: Para serialización de salida
+- **Update DTOs**: Para actualizaciones parciales
+
+## 📦 Instalación
+
+### Prerrequisitos
+- Node.js 18+ 
+- Docker & Docker Compose
+- PostgreSQL 15+
+
+### Pasos de instalación
+
+1. **Clonar el repositorio**
 ```bash
-# development
-$ npm run start
-
-# watch mode
-$ npm run start:dev
-
-# production mode
-$ npm run start:prod
+git clone <repository-url>
+cd panel-nodejs
 ```
 
-## Run tests
-
+2. **Instalar dependencias**
 ```bash
-# unit tests
-$ npm run test
-
-# e2e tests
-$ npm run test:e2e
-
-# test coverage
-$ npm run test:cov
+npm install
 ```
 
-## Deployment
-
-When you're ready to deploy your NestJS application to production, there are some key steps you can take to ensure it runs as efficiently as possible. Check out the [deployment documentation](https://docs.nestjs.com/deployment) for more information.
-
-If you are looking for a cloud-based platform to deploy your NestJS application, check out [Mau](https://mau.nestjs.com), our official platform for deploying NestJS applications on AWS. Mau makes deployment straightforward and fast, requiring just a few simple steps:
-
+3. **Configurar base de datos**
 ```bash
-$ npm install -g @nestjs/mau
-$ mau deploy
+# Levantar PostgreSQL con Docker
+docker-compose up -d
+
+# Ejecutar migraciones (si existen)
+npm run migration:run
 ```
 
-With Mau, you can deploy your application in just a few clicks, allowing you to focus on building features rather than managing infrastructure.
+4. **Variables de entorno**
+```bash
+# Crear .env basado en .env.example
+cp .env.example .env
 
-## Resources
+# Configurar variables
+DATABASE_HOST=localhost
+DATABASE_PORT=5432
+DATABASE_USERNAME=postgres
+DATABASE_PASSWORD=password
+DATABASE_NAME=panel_db
+```
 
-Check out a few resources that may come in handy when working with NestJS:
+5. **Ejecutar la aplicación**
+```bash
+# Desarrollo
+npm run start:dev
 
-- Visit the [NestJS Documentation](https://docs.nestjs.com) to learn more about the framework.
-- For questions and support, please visit our [Discord channel](https://discord.gg/G7Qnnhy).
-- To dive deeper and get more hands-on experience, check out our official video [courses](https://courses.nestjs.com/).
-- Deploy your application to AWS with the help of [NestJS Mau](https://mau.nestjs.com) in just a few clicks.
-- Visualize your application graph and interact with the NestJS application in real-time using [NestJS Devtools](https://devtools.nestjs.com).
-- Need help with your project (part-time to full-time)? Check out our official [enterprise support](https://enterprise.nestjs.com).
-- To stay in the loop and get updates, follow us on [X](https://x.com/nestframework) and [LinkedIn](https://linkedin.com/company/nestjs).
-- Looking for a job, or have a job to offer? Check out our official [Jobs board](https://jobs.nestjs.com).
+# Producción
+npm run build
+npm run start:prod
+```
 
-## Support
+La API estará disponible en: `http://localhost:8080`
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+## 🛠️ Scripts disponibles
 
-## Stay in touch
+```bash
+# Desarrollo
+npm run start:dev          # Servidor con hot reload
+npm run start:debug        # Servidor con debug
 
-- Author - [Kamil Myśliwiec](https://twitter.com/kammysliwiec)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+# Producción
+npm run build             # Compilar TypeScript
+npm run start:prod        # Ejecutar compilado
 
-## License
+# Testing
+npm run test              # Tests unitarios
+npm run test:e2e          # Tests end-to-end
+npm run test:cov          # Tests con coverage
 
-Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
+# Base de datos
+npm run migration:generate # Generar migración
+npm run migration:run     # Ejecutar migraciones
+npm run migration:revert  # Revertir migración
+```
+
+## 📚 API Endpoints - Customer
+
+### Base URL
+```
+http://localhost:8080/api/customers
+```
+
+### 1. Crear Cliente
+```bash
+curl -X POST http://localhost:8080/api/customers \
+  -H "Content-Type: application/json" \
+  -d '{
+    "name": "Juan",
+    "lastname": "Pérez",
+    "dni": "12345678",
+    "address": "Av. Principal 123, Lima",
+    "numberPhone": "+51 999 888 777",
+    "email": "juan.perez@email.com"
+  }'
+```
+
+**Respuesta exitosa (201):**
+```json
+{
+  "id": 1,
+  "name": "Juan",
+  "lastname": "Pérez",
+  "dni": "12345678",
+  "address": "Av. Principal 123, Lima",
+  "numberPhone": "+51 999 888 777",
+  "email": "juan.perez@email.com"
+}
+```
+
+### 2. Obtener todos los clientes
+```bash
+curl -X GET http://localhost:8080/api/customers
+```
+
+**Respuesta exitosa (200):**
+```json
+[
+  {
+    "id": 1,
+    "name": "Juan",
+    "lastname": "Pérez",
+    "dni": "12345678",
+    "address": "Av. Principal 123, Lima",
+    "numberPhone": "+51 999 888 777",
+    "email": "juan.perez@email.com"
+  }
+]
+```
+
+### 3. Obtener cliente por ID
+```bash
+curl -X GET http://localhost:8080/api/customers/1
+```
+
+**Respuesta exitosa (200):**
+```json
+{
+  "id": 1,
+  "name": "Juan",
+  "lastname": "Pérez",
+  "dni": "12345678",
+  "address": "Av. Principal 123, Lima",
+  "numberPhone": "+51 999 888 777",
+  "email": "juan.perez@email.com"
+}
+```
+
+### 4. Actualizar cliente
+```bash
+curl -X PUT http://localhost:8080/api/customers/1 \
+  -H "Content-Type: application/json" \
+  -d '{
+    "name": "Juan Carlos",
+    "email": "juan.carlos@email.com"
+  }'
+```
+
+**Respuesta exitosa (200):**
+```json
+{
+  "id": 1,
+  "name": "Juan Carlos",
+  "lastname": "Pérez",
+  "dni": "12345678",
+  "address": "Av. Principal 123, Lima",
+  "numberPhone": "+51 999 888 777",
+  "email": "juan.carlos@email.com"
+}
+```
+
+### 5. Eliminar cliente
+```bash
+curl -X DELETE http://localhost:8080/api/customers/1
+```
+
+**Respuesta exitosa (200):** Sin contenido
+
+## ⚠️ Validaciones y Errores
+
+### Validaciones de entrada
+- **DNI**: Exactamente 8 dígitos numéricos
+- **Email**: Formato válido y único
+- **Nombre/Apellido**: 2-50 caracteres
+- **Dirección**: 10-200 caracteres
+- **Teléfono**: 7-15 caracteres con formato válido
+
+### Ejemplo de error de validación
+```bash
+curl -X POST http://localhost:8080/api/customers \
+  -H "Content-Type: application/json" \
+  -d '{
+    "name": "J",
+    "dni": "123456789",
+    "email": "invalid-email"
+  }'
+```
+
+**Respuesta de error (400):**
+```json
+{
+  "statusCode": 400,
+  "message": "Error de validación",
+  "errors": [
+    "El nombre debe tener entre 2 y 50 caracteres",
+    "El DNI debe tener exactamente 8 dígitos",
+    "El email debe tener un formato válido"
+  ]
+}
+```
+
+## 🧪 Testing
+
+```bash
+# Ejecutar todos los tests
+npm run test
+
+# Tests con coverage
+npm run test:cov
+
+# Tests end-to-end
+npm run test:e2e
+
+# Tests en modo watch
+npm run test:watch
+```
+
+## 📁 Estructura del Proyecto
+
+```
+src/
+├── customer/                    # Módulo de clientes
+│   ├── domain/                 # Dominio
+│   │   ├── entities/           # Entidades
+│   │   └── interfaces/         # Interfaces del repositorio
+│   ├── application/            # Aplicación
+│   │   └── service/            # Servicios de aplicación
+│   ├── infrastructure/         # Infraestructura
+│   │   ├── controllers/        # Controladores REST
+│   │   └── repositories/       # Implementación de repositorios
+│   └── dto/                   # Data Transfer Objects
+├── common/                     # Código compartido
+│   └── utils/                  # Utilidades
+├── app.module.ts              # Módulo principal
+└── main.ts                    # Punto de entrada
+```
+
+## 🔧 Configuración
+
+### Base de datos
+```typescript
+// src/app.module.ts
+TypeOrmModule.forRoot({
+  type: 'postgres',
+  host: process.env.DATABASE_HOST,
+  port: parseInt(process.env.DATABASE_PORT),
+  username: process.env.DATABASE_USERNAME,
+  password: process.env.DATABASE_PASSWORD,
+  database: process.env.DATABASE_NAME,
+  entities: [__dirname + '/**/*.entity{.ts,.js}'],
+  synchronize: true, // Solo en desarrollo
+})
+```
+
+### Validación global
+```typescript
+// src/main.ts
+app.useGlobalPipes(new ValidationPipe({
+  transform: true,
+  whitelist: true,
+  forbidNonWhitelisted: true,
+  exceptionFactory: validationExceptionFactory,
+}));
+```
+
+## 📝 Licencia
+
+Este proyecto está bajo la Licencia MIT. Ver el archivo `LICENSE` para más detalles.
+
+
